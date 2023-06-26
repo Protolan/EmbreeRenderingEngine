@@ -13,7 +13,7 @@ public class Camera
     public int ResolutionX => _resolutionX;
     public int ResolutionY => _resolutionY;
 
-    public Camera(Vector3 direction, int resX = 4096 , int resY = 4096 , float fovDegrees = 35)
+    public Camera(Vector3 direction, int resX = 1920 , int resY = 1080 , float fovDegrees = 35)
     {
         _origin = new Vector3(-50, 0, 0);
         _resolutionX = resX;

@@ -46,11 +46,11 @@ public class ImageCreator
 
         // Compute average luminance
         float totalLuminance = 0.0f;
-        for (int i = 0; i < width; i++)
+        for (int x = 0; x < width; x++)
         {
-            for (int j = 0; j < height; j++)
+            for (int y = 0; y < height; y++)
             {
-                Vector3 pixel = hdrImage[i, j];
+                Vector3 pixel = hdrImage[x, y];
                 totalLuminance += 0.2126f * pixel.X + 0.7152f * pixel.Y + 0.0722f * pixel.Z; // weights for human perception
             }
         }
@@ -59,14 +59,14 @@ public class ImageCreator
 
         // Apply Reinhard tone mapping
         Vector3[,] ldrImage = new Vector3[width, height];
-        for (int i = 0; i < width; i++)
+        for (int x = 0; x < width; x++)
         {
-            for (int j = 0; j < height; j++)
+            for (int y = 0; y < height; y++)
             {
-                Vector3 hdrColor = hdrImage[i, j];
+                Vector3 hdrColor = hdrImage[x, y];
                 Vector3 ldrColor = Vector3.Divide(hdrColor, (hdrColor + new Vector3(avgLuminance, avgLuminance, avgLuminance)));
                 ldrColor *= 255; // Scale to 8 bit range
-                ldrImage[j, i] = ldrColor;
+                ldrImage[x, y] = ldrColor;
             }
         }
 

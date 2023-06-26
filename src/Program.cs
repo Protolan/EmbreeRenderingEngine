@@ -7,7 +7,11 @@ using Light = RaytracingEngine.Light;
 using Ray = TinyEmbree.Ray;
 
 
-var scene = new AssimpContext().ImportFile("scene.obj", PostProcessSteps.Triangulate);
+Console.WriteLine("Введите путь к файлу:");
+string filePath = Console.ReadLine();
+
+
+var scene = new AssimpContext().ImportFile(filePath, PostProcessSteps.Triangulate);
 Raytracer rt = new();
 Vector3D sum = new Vector3D(0, 0, 0);
 int count = 0;
@@ -25,7 +29,7 @@ var pivot = sum / count;
 Console.WriteLine(pivot.ToString());
 foreach (var mesh in scene.Meshes)
 {
-    Vector3[] vertices = mesh.Vertices.Select(v => new Vector3(v.X, v.Y, v.Z).RotateZ(90)).ToArray();
+    Vector3[] vertices = mesh.Vertices.Select(v => new Vector3(v.X, v.Y, v.Z).RotateZ(90).RotateX(90)).ToArray();
     int[] faces = mesh.Faces.SelectMany(f => f.Indices).ToArray();
     rt.AddMesh(new TriangleMesh(vertices, faces));
 }
