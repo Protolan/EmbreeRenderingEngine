@@ -32,13 +32,6 @@ public class Camera
         _topLeft = _origin + direction - right * _resolutionX / 2 * i + up * _resolutionY / 2 * j;
         _dx = right * i;
         _dy = -up * j;
-
-        // var angle = 45;
-        // var angle2 = 30;
-        // _origin = _origin.RotateY(angle).RotateX(angle2);
-        // _dx = _dx.RotateY(angle).RotateX(angle2);
-        // _dy = _dy.RotateY(angle).RotateX(angle2);
-        // _topLeft = _topLeft.RotateY(angle).RotateX(angle2);
     }
 
 

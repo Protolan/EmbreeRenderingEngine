@@ -4,14 +4,19 @@ namespace RaytracingEngine;
 
 public class Ray
 {
-    public Vector3 start;
+    public Vector3 origin;
     public Vector3 direction;
     public float distance;
-    public Ray(Vector3 start, Vector3 end)
+    public Vector3 rgb;
+    public float indexOfRefraction;
+    public Ray(Vector3 origin, Vector3 end)
     {
-        this.start = start;
-        var difference = end - start;
+        this.origin = origin;
+        rgb = new Vector3(1, 1, 1);
+        var difference = end - origin;
         distance = difference.Length();
         direction = Vector3.Normalize(difference);
+        indexOfRefraction = 1f;
     }
 }
+

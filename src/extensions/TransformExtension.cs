@@ -4,6 +4,19 @@ namespace RaytracingEngine;
 
 public static class TransformExtension
 {
+    public static Vector3 TransformVertex(Vector3 vertex, Vector3 position, Vector3 rotationEuler, Vector3 scale)
+    {
+        // Преобразование: масштабирование -> вращение -> перемещение
+        Matrix4x4 transformation = Matrix4x4.Identity
+                                   * Matrix4x4.CreateScale(scale.X, scale.Y, scale.Z)
+                                   * Matrix4x4.CreateRotationX(ToRadians(rotationEuler.X))
+                                   * Matrix4x4.CreateRotationY(ToRadians(rotationEuler.Y))
+                                   * Matrix4x4.CreateRotationZ(ToRadians(rotationEuler.Z))
+                                   * Matrix4x4.CreateTranslation(position.X, position.Y, position.Z);
+
+        return Vector3.Transform(new Vector3(vertex.X, vertex.Y, vertex.Z), transformation);
+    }
+    
     public static Vector3 RotateAxis(this Vector3 vector3, Vector3 axis, float angles)
     {
         var rotation = Quaternion.CreateFromAxisAngle(axis, ToRadians(angles));
